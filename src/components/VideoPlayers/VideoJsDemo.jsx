@@ -18,7 +18,7 @@ export function VideoJsDemo() {
       fluid: true,
       sources: [
         {
-          src: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/BigBuckBunny.mp4',
+          src: '/src/static/music.mp4',
           type: 'video/mp4',
         },
       ],
@@ -45,7 +45,7 @@ export function VideoJsDemo() {
       </div>
 
       <div className="info">
-        <p>BigBuckBunny.mp4 - MP4格式视频</p>
+        <p>music.mp4 - 本地MP4格式视频</p>
       </div>
     </div>
   )

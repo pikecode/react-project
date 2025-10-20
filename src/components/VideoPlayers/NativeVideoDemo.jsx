@@ -32,7 +32,7 @@ export function NativeVideoDemo() {
         style={{ backgroundColor: '#000' }}
       >
         <source
-          src="https://commondatastorage.googleapis.com/gtv-videos-library/sample/BigBuckBunny.mp4"
+          src="/src/static/music.mp4"
           type="video/mp4"
         />
         你的浏览器不支持HTML5 Video标签
@@ -45,7 +45,7 @@ export function NativeVideoDemo() {
       </div>
 
       <div className="info">
-        <p>使用浏览器原生video标签的简单实现</p>
+        <p>music.mp4 - 使用浏览器原生video标签的简单实现</p>
       </div>
     </div>
   )

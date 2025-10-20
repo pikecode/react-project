@@ -20,8 +20,8 @@ export function ReactPlayerDemo() {
 
   const testVideos = [
     {
-      name: '本地MP4',
-      url: 'https://commondatastorage.googleapis.com/gtv-videos-library/sample/BigBuckBunny.mp4',
+      name: '本地视频 (music.mp4)',
+      url: '/src/static/music.mp4',
     },
     {
       name: 'YouTube视频',
