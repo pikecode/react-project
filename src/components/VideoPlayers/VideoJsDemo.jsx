@@ -24,7 +24,7 @@ export function VideoJsDemo() {
       responsive: true,
       fluid: true,
       controlBar: {
-        // 自定义控制条
+        // 自定义控制条（移除不存在的qualitySelector）
         children: [
           'playToggle',
           'currentTimeDisplay',
@@ -32,20 +32,19 @@ export function VideoJsDemo() {
           'durationDisplay',
           'progressControl',
           'volumePanel',
-          'qualitySelector',
           'fullscreenToggle',
         ],
       },
-      sources: [
-        {
-          src: '../../static/music.mp4',
-          type: 'video/mp4',
-        },
-      ],
     }
 
     // 初始化播放器
     const player = videojs(videoRef.current, options)
+
+    // 设置视频源
+    player.src({
+      src: '../../static/music.mp4',
+      type: 'video/mp4',
+    })
 
     // 设置播放器实例
     playerRef.current = player
