@@ -38,7 +38,7 @@ export function VideoJsDemo() {
       },
       sources: [
         {
-          src: '/src/static/music.mp4',
+          src: '../../static/music.mp4',
           type: 'video/mp4',
         },
       ],

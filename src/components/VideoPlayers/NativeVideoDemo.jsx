@@ -79,7 +79,7 @@ export function NativeVideoDemo() {
         onEnded={() => setIsPlaying(false)}
       >
         <source
-          src="/src/static/music.mp4"
+          src="../../static/music.mp4"
           type="video/mp4"
         />
         你的浏览器不支持HTML5 Video标签
