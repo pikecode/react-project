@@ -7,6 +7,8 @@ export function NativeAudioDemo() {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [isSeeking, setIsSeeking] = useState(false)
+  const [volume, setVolume] = useState(1)
+  const [isMuted, setIsMuted] = useState(false)
 
   const handlePlayPause = () => {
     if (audioRef.current) {
@@ -55,6 +57,27 @@ export function NativeAudioDemo() {
   }
 
   const progressPercent = duration ? (currentTime / duration) * 100 : 0
+
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value)
+    setVolume(newVolume)
+    setIsMuted(false)
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume
+    }
+  }
+
+  const handleMuteToggle = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.volume = volume
+        setIsMuted(false)
+      } else {
+        audioRef.current.volume = 0
+        setIsMuted(true)
+      }
+    }
+  }
 
   return (
     <div className="audio-container">
@@ -108,6 +131,24 @@ export function NativeAudioDemo() {
         <div className="progress-info">
           <span>{Math.round(progressPercent)}% 已加载</span>
         </div>
+      </div>
+
+      <div className="volume-control-container">
+        <button onClick={handleMuteToggle} className="mute-btn">
+          {isMuted ? '🔇 静音' : '🔊 音量'}
+        </button>
+        <div className="volume-slider-wrapper">
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={isMuted ? 0 : volume}
+            onChange={handleVolumeChange}
+            className="volume-slider"
+          />
+        </div>
+        <span className="volume-value">{Math.round((isMuted ? 0 : volume) * 100)}%</span>
       </div>
 
       <div className="info">
