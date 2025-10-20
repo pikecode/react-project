@@ -21,7 +21,7 @@ export function ReactPlayerDemo() {
   const testVideos = [
     {
       name: '本地视频 (music.mp4)',
-      url: '../../static/music.mp4',
+      url: '/music.mp4',
     },
     {
       name: 'YouTube视频',

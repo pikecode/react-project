@@ -23,7 +23,7 @@ export function VideoJsDemo() {
 
     // 设置视频源
     player.src({
-      src: '../../static/music.mp4',
+      src: '/music.mp4',
       type: 'video/mp4',
     })
 
