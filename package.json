@@ -22,10 +22,7 @@
   "homepage": "https://github.com/pikecode/react-project#readme",
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-h5-audio-player": "^3.10.1",
-    "react-player": "^3.3.3",
-    "video.js": "^8.23.4"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.4",
