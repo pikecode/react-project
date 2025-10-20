@@ -128,3 +128,125 @@
 .info p {
   margin: 0;
 }
+
+/* Native Video Progress Bar Styles */
+.video-progress-container {
+  background: #242424;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.progress-bar-wrapper {
+  position: relative;
+  margin-bottom: 8px;
+  height: 8px;
+  background: #333;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #61dafb, #46d4dd);
+  border-radius: 4px;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+.progress-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.progress-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #61dafb;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(97, 218, 251, 0.5);
+  margin-top: -4px;
+  border: 2px solid #1a1a1a;
+}
+
+.progress-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #61dafb;
+  cursor: pointer;
+  border: 2px solid #1a1a1a;
+  box-shadow: 0 2px 8px rgba(97, 218, 251, 0.5);
+}
+
+.progress-slider::-moz-range-track {
+  background: transparent;
+  border: none;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85em;
+  color: #aaa;
+  font-family: 'Monaco', monospace;
+  gap: 6px;
+}
+
+.current-time {
+  color: #61dafb;
+  font-weight: 600;
+}
+
+.separator {
+  opacity: 0.5;
+}
+
+.duration {
+  opacity: 0.7;
+}
+
+.play-pause-btn {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #61dafb, #46d4dd);
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  font-size: 0.95em;
+}
+
+.play-pause-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(97, 218, 251, 0.3);
+}
+
+.play-pause-btn:active {
+  transform: translateY(0);
+}
+
+.progress-info {
+  margin-left: auto;
+  font-size: 0.85em;
+  color: #aaa;
+}
