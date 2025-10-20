@@ -1,0 +1,159 @@
+.audio-container {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.audio-container h2 {
+  margin-top: 0;
+  color: #61dafb;
+  font-size: 1.5em;
+}
+
+.audio-description {
+  background: #2a2a2a;
+  padding: 12px 16px;
+  border-left: 3px solid #61dafb;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.audio-description p {
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
+.audio-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.audio-item {
+  background: #242424;
+  border-radius: 6px;
+  padding: 16px;
+  border: 1px solid #333;
+}
+
+.audio-item h3 {
+  margin: 0 0 12px 0;
+  color: #61dafb;
+  font-size: 1.1em;
+}
+
+/* React H5 Audio Player Customization */
+.rhap_container {
+  background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.rhap_progress-section {
+  padding: 8px 0;
+}
+
+.rhap_progress-bar {
+  background: #444;
+  border-radius: 4px;
+}
+
+.rhap_progress-filled {
+  background: linear-gradient(90deg, #61dafb, #46d4dd);
+  border-radius: 4px;
+}
+
+.rhap_button-clear-bg:hover,
+.rhap_button-clear-bg:focus {
+  background: rgba(97, 218, 251, 0.1);
+}
+
+/* Custom Native Audio Controls */
+.custom-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.play-btn {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #61dafb, #46d4dd);
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95em;
+  transition: all 0.2s;
+}
+
+.play-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(97, 218, 251, 0.3);
+}
+
+.play-btn:active {
+  transform: translateY(0);
+}
+
+.progress-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1a1a1a;
+  padding: 10px 12px;
+  border-radius: 4px;
+}
+
+.time {
+  font-size: 0.85em;
+  color: #aaa;
+  min-width: 40px;
+  font-family: 'Monaco', monospace;
+}
+
+.time-slider {
+  flex: 1;
+  height: 6px;
+  cursor: pointer;
+  appearance: none;
+  background: linear-gradient(90deg, #61dafb, #61dafb) no-repeat;
+  background-size: 0% 100%;
+  border-radius: 3px;
+}
+
+.time-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #61dafb;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(97, 218, 251, 0.4);
+}
+
+.time-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #61dafb;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(97, 218, 251, 0.4);
+}
+
+.time-slider::-webkit-slider-runnable-track {
+  background: #333;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.time-slider::-moz-range-track {
+  background: transparent;
+  border: none;
+}
