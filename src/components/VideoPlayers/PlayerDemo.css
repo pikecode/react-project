@@ -140,30 +140,31 @@
 .progress-bar-wrapper {
   position: relative;
   margin-bottom: 8px;
-  height: 8px;
-  background: #333;
+  height: 24px;
+  background: transparent;
   border-radius: 4px;
-  overflow: hidden;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .progress-bar-fill {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
-  height: 100%;
+  height: 6px;
   background: linear-gradient(90deg, #61dafb, #46d4dd);
   border-radius: 4px;
   transition: width 0.1s linear;
   pointer-events: none;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
 .progress-slider {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: 24px;
   cursor: pointer;
   appearance: none;
   background: transparent;
@@ -171,34 +172,63 @@
   padding: 0;
   margin: 0;
   -webkit-appearance: none;
+  z-index: 2;
+}
+
+.progress-slider::-webkit-slider-runnable-track {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #333;
+  border-radius: 4px;
+  border: none;
 }
 
 .progress-slider::-webkit-slider-thumb {
   appearance: none;
   -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: #61dafb;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(97, 218, 251, 0.5);
-  margin-top: -4px;
-  border: 2px solid #1a1a1a;
+  box-shadow: 0 2px 8px rgba(97, 218, 251, 0.6);
+  border: 2px solid white;
+  margin-top: -6px;
 }
 
-.progress-slider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #61dafb;
-  cursor: pointer;
-  border: 2px solid #1a1a1a;
-  box-shadow: 0 2px 8px rgba(97, 218, 251, 0.5);
+.progress-slider::-webkit-slider-thumb:hover {
+  background: #46d4dd;
+  box-shadow: 0 4px 12px rgba(97, 218, 251, 0.8);
 }
 
 .progress-slider::-moz-range-track {
-  background: transparent;
+  background: #333;
   border: none;
+  border-radius: 4px;
+  height: 6px;
+}
+
+.progress-slider::-moz-range-progress {
+  background: linear-gradient(90deg, #61dafb, #46d4dd);
+  border-radius: 4px;
+  height: 6px;
+}
+
+.progress-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #61dafb;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(97, 218, 251, 0.6);
+}
+
+.progress-slider::-moz-range-thumb:hover {
+  background: #46d4dd;
+  box-shadow: 0 4px 12px rgba(97, 218, 251, 0.8);
 }
 
 .time-display {
