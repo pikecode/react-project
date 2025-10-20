@@ -48,7 +48,7 @@ export function ReactPlayerDemo() {
                 url={video.url}
                 playing={playing}
                 onProgress={(state) => setProgress(state.played)}
-                onDuration={setDuration}
+                onDuration={(dur) => setDuration(dur)}
                 onEnded={() => setPlaying(false)}
                 controls
                 width="100%"
