@@ -37,7 +37,6 @@ export function VideoPlayer({
   src,
   poster,
   subtitle,
-  title,
   className = '',
   onPlay,
   onPause,
@@ -180,6 +179,13 @@ export function VideoPlayer({
 
       {/* Progress Bar */}
       <div className="video-player-progress-container">
+        {/* Time Display */}
+        <div className="video-player-time-display">
+          <span className="video-player-current-time">{formatTime(currentTime)}</span>
+          <span className="video-player-separator">/</span>
+          <span className="video-player-duration">{formatTime(duration)}</span>
+        </div>
+
         <div className="video-player-progress-bar-wrapper">
           <div
             className="video-player-progress-bar-fill"
@@ -199,17 +205,7 @@ export function VideoPlayer({
             aria-label="Video progress"
           />
         </div>
-
-        {/* Time Display */}
-        <div className="video-player-time-display">
-          <span className="video-player-current-time">{formatTime(currentTime)}</span>
-          <span className="video-player-separator">/</span>
-          <span className="video-player-duration">{formatTime(duration)}</span>
-        </div>
       </div>
-
-      {/* Title Display */}
-      {title && <div className="video-player-title">{title}</div>}
     </div>
   )
 }

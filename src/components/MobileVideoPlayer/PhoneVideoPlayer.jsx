@@ -47,18 +47,25 @@ export function PhoneVideoPlayer({
   return (
     <div className={`phone-video-player ${className}`}>
       <PhoneFrame variant={variant}>
-        <VideoPlayer
-          src={src}
-          poster={poster}
-          subtitle={subtitle}
-          title={title}
-          onPlay={onPlay}
-          onPause={onPause}
-          onEnded={onEnded}
-          autoplay={autoplay}
-          showControls={showControls}
-          loop={loop}
-        />
+        <div className="phone-video-inner">
+          <VideoPlayer
+            src={src}
+            poster={poster}
+            subtitle={subtitle}
+            title={title}
+            onPlay={onPlay}
+            onPause={onPause}
+            onEnded={onEnded}
+            autoplay={autoplay}
+            showControls={showControls}
+            loop={loop}
+            className="phone-video-player-core"
+          />
+          <div className="phone-video-bottom-bar" aria-hidden="true">
+            <span className="phone-video-bottom-label active">叙梦</span>
+            <span className="phone-video-bottom-label">我的</span>
+          </div>
+        </div>
       </PhoneFrame>
     </div>
   )
