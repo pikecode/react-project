@@ -1,8 +1,5 @@
 import { useState } from 'react'
-import { MediaPlayerTest } from './pages/MediaPlayerTest'
-import { VideoPlayerDemo } from './pages/VideoPlayerDemo'
 import { PhoneVideoPlayerPackDemo } from './pages/PhoneVideoPlayerPackDemo'
-import { PhoneVideoPlayerShowcase } from './pages/PhoneVideoPlayerShowcase'
 import './App.css'
 
 function App() {
@@ -11,37 +8,13 @@ function App() {
   return (
     <div className="app">
       <nav className="app-nav">
-        <button
-          className={`nav-btn ${currentPage === 'phone-showcase' ? 'active' : ''}`}
-          onClick={() => setCurrentPage('phone-showcase')}
-        >
-          Phone Showcase
-        </button>
-        <button
-          className={`nav-btn ${currentPage === 'phone-pack-demo' ? 'active' : ''}`}
-          onClick={() => setCurrentPage('phone-pack-demo')}
-        >
+        <button className={`nav-btn active`} onClick={() => setCurrentPage('phone-pack-demo')}>
           Phone Pack Demo
-        </button>
-        <button
-          className={`nav-btn ${currentPage === 'video-player' ? 'active' : ''}`}
-          onClick={() => setCurrentPage('video-player')}
-        >
-          VideoPlayer Component
-        </button>
-        <button
-          className={`nav-btn ${currentPage === 'media-test' ? 'active' : ''}`}
-          onClick={() => setCurrentPage('media-test')}
-        >
-          Media Player Test
         </button>
       </nav>
 
       <main className="app-main">
-        {currentPage === 'phone-showcase' && <PhoneVideoPlayerShowcase />}
         {currentPage === 'phone-pack-demo' && <PhoneVideoPlayerPackDemo />}
-        {currentPage === 'video-player' && <VideoPlayerDemo />}
-        {currentPage === 'media-test' && <MediaPlayerTest />}
       </main>
     </div>
   )
