@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { PhoneVideoPlayer } from '../components/MobileVideoPlayer/PhoneVideoPlayer'
+import PhoneVideoPlayer from '../components/PhoneVideoPlayer'
 import './PhoneVideoPlayerShowcase.css'
 
 const VIDEO_PRESETS = [
@@ -345,7 +345,7 @@ export function PhoneVideoPlayerShowcase() {
 
       <section className="code-sample">
         <h2>用法示例</h2>
-        <pre>{`import { PhoneVideoPlayer } from '@/components/MobileVideoPlayer'
+        <pre>{`import PhoneVideoPlayer from '@/components/PhoneVideoPlayer'
 
 export function HeroPhonePreview() {
   return (
@@ -362,7 +362,7 @@ export function HeroPhonePreview() {
       <footer className="page-footer">
         <p>
           组件文件位置：
-          <code>src/components/MobileVideoPlayer/PhoneVideoPlayer.jsx</code>
+          <code>src/components/PhoneVideoPlayer/PhoneVideoPlayer.jsx</code>
         </p>
       </footer>
     </div>

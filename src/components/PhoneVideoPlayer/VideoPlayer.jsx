@@ -21,6 +21,7 @@ import './styles/VideoPlayer.css'
  * @param {function} props.onPlay - Callback when video plays
  * @param {function} props.onPause - Callback when video pauses
  * @param {function} props.onEnded - Callback when video ends
+ * @param {function} props.onError - Callback when video errors (receives MediaError or event)
  * @param {boolean} props.autoplay - Auto play on mount (mobile通常需静音)
  * @param {boolean} props.showControls - Show play/pause button (default: true)
  * @param {boolean} props.loop - Loop the video
@@ -51,6 +52,7 @@ export function VideoPlayer({
   onPlay,
   onPause,
   onEnded,
+  onError,
   autoplay = false,
   showControls = true,
   loop = false,
@@ -74,6 +76,8 @@ export function VideoPlayer({
   const [isSeeking, setIsSeeking] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const [bufferedEnd, setBufferedEnd] = useState(0)
+  const [hasError, setHasError] = useState(false)
+  const rafRef = useRef(null)
 
   // Format time to MM:SS or HH:MM:SS
   const formatTime = (time) => {
@@ -109,9 +113,12 @@ export function VideoPlayer({
 
   // Time update handler
   const handleTimeUpdate = () => {
-    if (videoRef.current && !isSeeking) {
-      setCurrentTime(videoRef.current.currentTime)
-    }
+    if (!videoRef.current || isSeeking) return
+    if (rafRef.current) return
+    rafRef.current = requestAnimationFrame(() => {
+      if (videoRef.current) setCurrentTime(videoRef.current.currentTime)
+      rafRef.current = null
+    })
   }
 
   // Metadata loaded handler
@@ -156,6 +163,31 @@ export function VideoPlayer({
     setIsSeeking(false)
   }
 
+  // Keyboard seek on slider: ArrowLeft/Right/Home/End
+  const handleProgressKeyDown = (e) => {
+    if (!videoRef.current || !duration) return
+    const step = 5 // seconds
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault()
+      const t = Math.max(0, videoRef.current.currentTime - step)
+      videoRef.current.currentTime = t
+      setCurrentTime(t)
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault()
+      const t = Math.min(duration, videoRef.current.currentTime + step)
+      videoRef.current.currentTime = t
+      setCurrentTime(t)
+    } else if (e.key === 'Home') {
+      e.preventDefault()
+      videoRef.current.currentTime = 0
+      setCurrentTime(0)
+    } else if (e.key === 'End') {
+      e.preventDefault()
+      videoRef.current.currentTime = duration
+      setCurrentTime(duration)
+    }
+  }
+
   // Video events: 将播放器状态与回调同步到 React
   useEffect(() => {
     const v = videoRef.current
@@ -173,6 +205,11 @@ export function VideoPlayer({
       setIsPlaying(false)
       onEnded?.()
     }
+    const onVideoError = (event) => {
+      setIsPlaying(false)
+      setHasError(true)
+      onError?.(event?.target?.error || event)
+    }
 
     v.addEventListener('play', onVideoPlay)
     v.addEventListener('pause', onVideoPause)
@@ -180,6 +217,7 @@ export function VideoPlayer({
     v.addEventListener('progress', updateBuffered)
     v.addEventListener('loadedmetadata', updateBuffered)
     v.addEventListener('durationchange', updateBuffered)
+    v.addEventListener('error', onVideoError)
 
     return () => {
       v.removeEventListener('play', onVideoPlay)
@@ -188,6 +226,7 @@ export function VideoPlayer({
       v.removeEventListener('progress', updateBuffered)
       v.removeEventListener('loadedmetadata', updateBuffered)
       v.removeEventListener('durationchange', updateBuffered)
+      v.removeEventListener('error', onVideoError)
     }
   }, [onPlay, onPause, onEnded])
 
@@ -207,6 +246,31 @@ export function VideoPlayer({
       v.addEventListener('canplay', tryPlay, { once: true })
     }
   }, [autoplay, muted])
+
+  // Reset and reload when src changes; honor autoplay
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    setHasError(false)
+    setDuration(0)
+    setCurrentTime(0)
+    setBufferedEnd(0)
+    try {
+      v.pause()
+      v.load()
+      if (autoplay) {
+        v.muted = muted || autoplay
+        const tryPlay = () => v.play().catch(() => {})
+        if (v.readyState >= 2) tryPlay()
+        else v.addEventListener('canplay', tryPlay, { once: true })
+      }
+    } catch (_) {}
+  }, [src])
+
+  // Cleanup RAF
+  useEffect(() => () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current)
+  }, [])
 
   // Keyboard controls (spacebar to play/pause)
   useEffect(() => {
@@ -253,9 +317,42 @@ export function VideoPlayer({
           muted={muted || autoplay}
           preload="metadata"
         >
-          <source src={src} type="video/mp4" />
+          <source key={src} src={src} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+
+        {/* Error Overlay */}
+        {hasError && (
+          <div
+            className="video-player-error"
+            role="alert"
+            style={{
+              position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: 'rgba(0,0,0,0.6)', zIndex: 10, flexDirection: 'column', gap: '10px', color: '#fff',
+            }}
+          >
+            <div>播放出错，请重试</div>
+            <button
+              onClick={() => {
+                setHasError(false)
+                const v = videoRef.current
+                if (v) {
+                  try {
+                    v.load()
+                    if (autoplay) {
+                      v.muted = muted || autoplay
+                      v.play().catch(() => {})
+                    }
+                  } catch (_) {}
+                }
+              }}
+              style={{
+                padding: '6px 12px', borderRadius: 6, border: '1px solid rgba(255,255,255,0.6)',
+                background: 'rgba(255,255,255,0.12)', color: '#fff', cursor: 'pointer',
+              }}
+            >重试</button>
+          </div>
+        )}
 
         {/* Subtitle/Overlay Text */}
         {subtitle && (
@@ -332,8 +429,12 @@ export function VideoPlayer({
             onMouseUp={handleProgressMouseUp}
             onTouchStart={handleProgressMouseDown}
             onTouchEnd={handleProgressMouseUp}
+            onKeyDown={handleProgressKeyDown}
             className="video-player-progress-slider"
             aria-label="Video progress"
+            aria-valuemin={0}
+            aria-valuemax={Math.floor(duration) || 0}
+            aria-valuenow={Math.floor(currentTime) || 0}
           />
         </div>
       </div>
@@ -342,4 +443,3 @@ export function VideoPlayer({
 }
 
 export default VideoPlayer
-

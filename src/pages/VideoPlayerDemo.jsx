@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PhoneVideoPlayer } from '../components/MobileVideoPlayer/PhoneVideoPlayer'
+import PhoneVideoPlayer from '../components/PhoneVideoPlayer'
 import './VideoPlayerDemo.css'
 
 /**
@@ -49,7 +49,7 @@ export function VideoPlayerDemo() {
             />
           </div>
           <div className="demo-code">
-            <pre>{`<PhoneVideoPlayer
+              <pre>{`<PhoneVideoPlayer
   src="/music.mp4"
   onPlay={handlePlay}
   onPause={handlePause}
@@ -173,7 +173,7 @@ export function VideoPlayerDemo() {
           <div className="example-item">
             <h3>Basic Usage</h3>
             <div className="demo-code">
-              <pre>{`import { PhoneVideoPlayer } from '@/components/MobileVideoPlayer'
+              <pre>{`import PhoneVideoPlayer from '@/components/PhoneVideoPlayer'
 
 export function App() {
   return (
@@ -220,7 +220,7 @@ export function App() {
       {/* Footer */}
       <footer className="demo-footer">
         <p>
-          Located at <code>src/components/MobileVideoPlayer/PhoneVideoPlayer.jsx</code>
+          Located at <code>src/components/PhoneVideoPlayer/PhoneVideoPlayer.jsx</code>
         </p>
       </footer>
     </div>
