@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import PhoneVideoPlayer from '../components/PhoneVideoPlayer'
+import AudioPlayer from '../components/AudioPlayer'
 
 export function PhoneVideoPlayerPackDemo() {
   const [edgeToEdge, setEdgeToEdge] = useState(true)
@@ -263,6 +264,25 @@ export function PhoneVideoPlayerPackDemo() {
             </label>
           </div>
         </div>
+      </div>
+
+      <hr style={{ margin: '24px 0', borderColor: 'rgba(255,255,255,0.08)' }} />
+      <h2>Audio Player Demo</h2>
+      <p style={{ marginTop: 0, color: '#7a8699' }}>基于原生 HTML5 &lt;audio&gt; 的自定义控件播放器</p>
+      <div style={{ maxWidth: 720 }}>
+        <AudioPlayer
+          src="/m.mp3"
+          title="示例音频"
+          autoplay={false}
+          loop={false}
+          muted={false}
+          progressPlayedColor={playedColor}
+          progressBufferedColor={bufferedRgba}
+          progressTrackColor={trackRgba}
+          progressThumbWidth={`${thumbWidth}px`}
+          progressThumbHeight={`${thumbHeight}px`}
+          progressThumbRadius={`${thumbRadius}px`}
+        />
       </div>
     </div>
   )
