@@ -1,7 +1,7 @@
 import React from 'react'
-import { PhoneFrame } from '../PhoneFrame/PhoneFrame'
-import { VideoPlayer } from '../VideoPlayers/VideoPlayer'
-import './PhoneVideoPlayer.css'
+import { PhoneFrame } from './PhoneFrame'
+import { VideoPlayer } from './VideoPlayer'
+import './styles/PhoneVideoPlayer.css'
 
 /**
  * PhoneVideoPlayer Component
@@ -28,11 +28,11 @@ import './PhoneVideoPlayer.css'
  * @param {Array<string>} props.bottomBarLabels - 默认底部栏的文案（用于快速本地化，默认 ['叙梦','我的']）
  * @param {number} props.bottomBarActiveIndex - 默认底部栏激活项索引（默认 0）
  * @param {function} props.renderBottomBar - render prop，自定义渲染底部栏（主题化/国际化）。
-   *   形如：({ DefaultBottomBar, labels, activeIndex }) => ReactNode
+ *   形如：({ DefaultBottomBar, labels, activeIndex }) => ReactNode
  * @param {boolean} props.edgeToEdge - 是否启用全屏贴边（充满屏幕、刘海与 Home 指示器覆盖在上方，默认 true）
  * @param {boolean} props.showNotch - 是否显示刘海/动态岛（默认 false）
  * @param {('below'|'overlay')} props.bottomBarPosition - 底部栏位置：
-   *   'below'（在视频下面，默认），'overlay'（悬浮覆盖在视频上方）
+ *   'below'（在视频下面，默认），'overlay'（悬浮覆盖在视频上方）
  * @param {('glass'|'icon')} props.playButtonVariant - 播放按钮样式切换（默认 'glass'）
  * @param {string} props.progressPlayedColor - 进度条“已播放”颜色（CSS 颜色字符串）
  * @param {string} props.progressBufferedColor - 进度条“已缓冲未播放”颜色（CSS 颜色字符串）
@@ -150,3 +150,4 @@ export function PhoneVideoPlayer({
 }
 
 export default PhoneVideoPlayer
+

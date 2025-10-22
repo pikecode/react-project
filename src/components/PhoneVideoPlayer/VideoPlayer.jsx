@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import './VideoPlayer.css'
+import './styles/VideoPlayer.css'
 
 /**
  * Reusable VideoPlayer Component
@@ -139,7 +139,6 @@ export function VideoPlayer({
     }
   }
 
-
   // Progress bar change handler
   const handleProgressChange = (e) => {
     const newTime = parseFloat(e.target.value)
@@ -149,12 +148,10 @@ export function VideoPlayer({
     }
   }
 
-  // Seeking start handler
+  // Seeking start/end
   const handleProgressMouseDown = () => {
     setIsSeeking(true)
   }
-
-  // Seeking end handler
   const handleProgressMouseUp = () => {
     setIsSeeking(false)
   }
@@ -224,7 +221,7 @@ export function VideoPlayer({
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [isPlaying])
 
-  // 允许通过 props 覆盖 CSS 变量，定制进度条颜色
+  // 允许通过 props 覆盖 CSS 变量，定制进度条与拇指
   const cssVarStyle = {
     ...(progressPlayedColor ? { ['--vp-played']: progressPlayedColor } : {}),
     ...(progressBufferedColor ? { ['--vp-buffered']: progressBufferedColor } : {}),
@@ -345,3 +342,4 @@ export function VideoPlayer({
 }
 
 export default VideoPlayer
+

@@ -218,8 +218,6 @@
   z-index: 14; /* 提高层级，避免被底部栏或其他元素遮挡 */
 }
 
-/* (vertical progress UI removed) */
-
 /* Progress Bar */
 .video-player-progress-bar-wrapper {
   position: relative;
@@ -400,3 +398,4 @@
     font-size: 24px;
   }
 }
+

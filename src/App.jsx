@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { MediaPlayerTest } from './pages/MediaPlayerTest'
 import { VideoPlayerDemo } from './pages/VideoPlayerDemo'
+import { PhoneVideoPlayerPackDemo } from './pages/PhoneVideoPlayerPackDemo'
 import { PhoneVideoPlayerShowcase } from './pages/PhoneVideoPlayerShowcase'
 import './App.css'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('phone-showcase')
+  const [currentPage, setCurrentPage] = useState('phone-pack-demo')
 
   return (
     <div className="app">
@@ -15,6 +16,12 @@ function App() {
           onClick={() => setCurrentPage('phone-showcase')}
         >
           Phone Showcase
+        </button>
+        <button
+          className={`nav-btn ${currentPage === 'phone-pack-demo' ? 'active' : ''}`}
+          onClick={() => setCurrentPage('phone-pack-demo')}
+        >
+          Phone Pack Demo
         </button>
         <button
           className={`nav-btn ${currentPage === 'video-player' ? 'active' : ''}`}
@@ -32,6 +39,7 @@ function App() {
 
       <main className="app-main">
         {currentPage === 'phone-showcase' && <PhoneVideoPlayerShowcase />}
+        {currentPage === 'phone-pack-demo' && <PhoneVideoPlayerPackDemo />}
         {currentPage === 'video-player' && <VideoPlayerDemo />}
         {currentPage === 'media-test' && <MediaPlayerTest />}
       </main>

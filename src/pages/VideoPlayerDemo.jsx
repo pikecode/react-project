@@ -43,7 +43,6 @@ export function VideoPlayerDemo() {
           <div className="demo-phone-frame-wrapper">
             <PhoneVideoPlayer
               src="/music.mp4"
-              subtitle="她前夫要是看到这个场景"
               onPlay={handlePlay}
               onPause={handlePause}
               onEnded={handleEnded}
@@ -52,7 +51,6 @@ export function VideoPlayerDemo() {
           <div className="demo-code">
             <pre>{`<PhoneVideoPlayer
   src="/music.mp4"
-  subtitle="她前夫要是看到这个场景"
   onPlay={handlePlay}
   onPause={handlePause}
   onEnded={handleEnded}

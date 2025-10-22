@@ -87,8 +87,6 @@
   bottom: 22px;
 }
 
-/* 去除顶部光晕效果 */
-
 .phone-video-bottom-label {
   position: relative;
   font-weight: 500;
@@ -127,11 +125,6 @@
     bottom: -6px;
   }
 
-  .phone-video-player.edge-to-edge.bar-overlay .video-player-progress-container {
-    width: calc(100% - 24px);
-    bottom: 20px;
-  }
-
   .phone-video-player-wrapper {
     min-height: 0;
     padding: 0;
@@ -153,9 +146,5 @@
     width: calc(100% - 22px);
     bottom: -4px; /* 小屏稍微保守，减少重叠风险 */
   }
-
-  .phone-video-player.edge-to-edge.bar-overlay .video-player-progress-container {
-    width: calc(100% - 22px);
-    bottom: 18px;
-  }
 }
+

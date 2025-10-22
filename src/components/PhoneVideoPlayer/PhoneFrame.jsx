@@ -1,5 +1,5 @@
 import React from 'react'
-import './PhoneFrame.css'
+import './styles/PhoneFrame.css'
 
 /**
  * PhoneFrame Component
@@ -49,3 +49,4 @@ export function PhoneFrame({ children, variant = 'iphone14', className = '', sho
 }
 
 export default PhoneFrame
+
