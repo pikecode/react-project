@@ -39,6 +39,7 @@ export function AudioPlayer({
   const [isSeeking, setIsSeeking] = useState(false)
   const [bufferedEnd, setBufferedEnd] = useState(0)
   const [hasError, setHasError] = useState(false)
+  const [volumeLevel, setVolumeLevel] = useState(10) // 1-10 档位
 
   // 统一 CSS 变量覆盖
   const cssVarStyle = {
@@ -185,6 +186,12 @@ export function AudioPlayer({
 
   useEffect(() => () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }, [])
 
+  // 初始设置音量为档位值（非静音）
+  useEffect(() => {
+    const a = audioRef.current
+    if (a) a.volume = volumeLevel / 10
+  }, [])
+
   return (
     <div className={`audio-player ${className}`} ref={containerRef} style={cssVarStyle}>
       <audio
@@ -227,9 +234,9 @@ export function AudioPlayer({
         </div>
       )}
 
-      {/* 进度条 */}
-      <div className="audio-progress">
-        <div className="audio-progress-rail">
+      {/* 控制区：播放按钮 + 进度条 + 音量 在一行 */}
+      <div className="audio-controls">
+        <div className="audio-progress-rail audio-progress-rail-inline">
           <div className="audio-progress-buffered" style={{ width: `${bufferedPercent}%` }} />
           <div className="audio-progress-played" style={{ width: `${progressPercent}%` }} />
           <input
@@ -250,46 +257,39 @@ export function AudioPlayer({
             aria-valuenow={Math.floor(currentTime) || 0}
           />
         </div>
-      </div>
-
-      {/* 控制区 */}
-      <div className="audio-controls">
-        <button className="audio-btn" onClick={handlePlayPause} aria-label={isPlaying ? 'Pause' : 'Play'}>
-          {isPlaying ? (
-            <svg viewBox="0 0 24 24" className="audio-ico"><rect x="5" y="4" width="5" height="16" rx="1.5" /><rect x="14" y="4" width="5" height="16" rx="1.5" /></svg>
-          ) : (
-            <svg viewBox="0 0 24 24" className="audio-ico"><polygon points="6,4 20,12 6,20" /></svg>
-          )}
-        </button>
-
         <div className="audio-volume">
-          <button
-            className="audio-btn"
-            onClick={() => {
-              const a = audioRef.current; if (!a) return
-              if (a.muted || a.volume === 0) { a.muted = false; a.volume = 1 } else { a.muted = true }
-              // 触发刷新
-              setCurrentTime((t) => t)
-            }}
-            aria-label="Mute/Unmute"
-          >
-            <span className="audio-vol-ico">🔊</span>
-          </button>
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            defaultValue={muted ? 0 : 1}
-            onChange={(e) => { const a = audioRef.current; if (!a) return; a.muted = false; a.volume = parseFloat(e.target.value) }}
-            className="audio-volume-slider"
-            aria-label="Volume"
-          />
+          <div className="audio-volume-pill">
+            <select
+              className="audio-volume-select"
+              value={volumeLevel}
+              onChange={(e) => {
+                const lvl = parseInt(e.target.value, 10) || 10
+                setVolumeLevel(lvl)
+                const a = audioRef.current
+                if (a) { a.muted = false; a.volume = Math.min(1, Math.max(0, lvl / 10)) }
+              }}
+              aria-label="Volume Level"
+            >
+              {Array.from({ length: 10 }).map((_, i) => (
+                <option key={i + 1} value={i + 1}>{i + 1}</option>
+              ))}
+            </select>
+            <span className="audio-pill-caret">▾</span>
+          </div>
         </div>
+        <button className="audio-btn audio-cta" onClick={handlePlayPause} aria-label={isPlaying ? 'Pause' : 'Play'}>
+          <span className="audio-ico-wrap">
+            {isPlaying ? (
+              <svg viewBox="0 0 24 24" className="audio-ico"><rect x="6" y="6" width="4" height="12" rx="1" /><rect x="14" y="6" width="4" height="12" rx="1" /></svg>
+            ) : (
+              <svg viewBox="0 0 24 24" className="audio-ico"><polygon points="8,6 18,12 8,18" /></svg>
+            )}
+          </span>
+          <span className="audio-cta-text">{isPlaying ? '暂停' : '播放'}</span>
+        </button>
       </div>
     </div>
   )
 }
 
 export default AudioPlayer
-

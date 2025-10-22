@@ -31,8 +31,9 @@
 .audio-time { color: rgba(255,255,255,0.8); font-variant-numeric: tabular-nums; }
 .audio-time-sep { color: rgba(255,255,255,0.5); margin: 0 6px; }
 
-.audio-progress { margin: 6px 0 10px; }
 .audio-progress-rail { position: relative; height: 28px; display: flex; align-items: center; }
+.audio-controls { display: flex; align-items: center; gap: 12px; }
+.audio-controls .audio-progress-rail-inline { flex: 1; margin: 0 8px; }
 .audio-progress-buffered,
 .audio-progress-played { position: absolute; height: 4px; border-radius: 999px; top: 50%; transform: translateY(-50%); left: 0; pointer-events: none; }
 .audio-progress-buffered { width: 0; background: var(--ap-buffered); }
@@ -59,19 +60,28 @@
 }
 .audio-progress-slider::-moz-range-thumb:active { transform: scaleY(1.08); }
 
-.audio-controls {
-  display: flex; align-items: center; gap: 10px; justify-content: space-between;
-}
 .audio-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.08); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform .16s ease, background .16s ease; }
 .audio-btn:hover { transform: scale(1.04); background: rgba(255,255,255,0.14); }
 .audio-ico { width: 22px; height: 22px; fill: currentColor; display: block; }
 .audio-vol-ico { font-size: 16px; }
 
-.audio-volume { display: flex; align-items: center; gap: 10px; flex: 1; }
-.audio-volume-slider { width: 100%; appearance: none; -webkit-appearance: none; height: 6px; background: rgba(255,255,255,0.18); border-radius: 999px; }
-.audio-volume-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.35); }
-.audio-volume-slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+/* CTA 风格：蓝色描边的胶囊按钮，含小圆圈图标与文字 */
+.audio-btn.audio-cta { height: 32px; width: auto; padding: 0 10px; border-radius: 999px; border: 1px solid #2b6fff; background: transparent; color: #2b6fff; gap: 6px; }
+.audio-btn.audio-cta:hover { background: rgba(43,111,255,0.08); transform: none; }
+.audio-btn.audio-cta:active { background: rgba(43,111,255,0.12); }
+.audio-ico-wrap { width: 18px; height: 18px; border: 1px solid #2b6fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.audio-btn.audio-cta .audio-ico { width: 12px; height: 12px; }
+.audio-cta-text { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; }
+
+.audio-volume { display: flex; align-items: center; gap: 10px; }
+.audio-volume-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border: 1px solid #2b6fff; border-radius: 8px; color: #2b6fff; background: rgba(43,111,255,0.06); }
+.audio-volume-select { height: 32px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.08); color: #fff; padding: 0 8px; cursor: pointer; }
+.audio-volume-select option { color: #000; }
+.audio-volume-pill .audio-volume-select {
+  border: none; background: transparent; color: inherit; height: auto; padding: 0;
+  appearance: none; -webkit-appearance: none; /* 隐藏原生下拉箭头，使用自绘 caret */
+}
+.audio-pill-caret { font-size: 12px; line-height: 1; color: #2b6fff; }
 
 .audio-error { position: relative; background: rgba(255,77,77,0.12); border: 1px solid rgba(255,77,77,0.35); color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .audio-retry-btn { padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.6); background: rgba(255,255,255,0.12); color: #fff; cursor: pointer; }
-
